@@ -9,9 +9,8 @@ function App() {
   return (
     <>
       <div style={{width:"100vw", height:"100vh", backgroundColor:"#eeeeee"}}>
-        {/* <Appbar></Appbar> */}
+       <Appbar></Appbar>
 
-        jjkjhk
         <Router>
 
           <Routes>
@@ -19,7 +18,7 @@ function App() {
             <Route path ="signup" element ={<Signup/>}></Route>
             </Routes>
         </Router>
-bdksak
+
       </div>
      
       

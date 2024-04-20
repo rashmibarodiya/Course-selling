@@ -24,7 +24,7 @@ function Signup() {
                 
                 <Card variant='outlined' style={{ width: 300, padding: 20}} >
                     <TextField
-                         fullWidth= {"true"} 
+                        fullWidth= {"true"} 
                         id="outlined-basic"
                         label="username"
                         variant="outlined"
@@ -40,7 +40,10 @@ function Signup() {
                     />
                     <br />
                     <br />
-                    <Button size={"large"} variant="outlined">Signup</Button>
+                    <Button size={"large"} variant="outlined"
+                   
+                    
+                    >Signup</Button>
 
                 </Card>
             </div>
