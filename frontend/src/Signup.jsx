@@ -4,7 +4,8 @@ import { Button, Typography, Card, TextField } from "@mui/material"
 import { useState } from "react"
 import { Link } from 'react-router-dom';
 function Signup() {
-
+   // require('dotnev').config()
+   // const backendUrl= process.env.BACKEND_URL;
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
@@ -56,21 +57,32 @@ function Signup() {
                     
                     <Button
                         onClick={() => {
-                            fetch(`${window.location.protocol}//${window.location.hostname}:${window.location.port}/admin/signup`, {
-                                method: "POST",
-                                body: JSON.stringify({
-                                    username,
-                                    password
-                                }),
-                                headers: {
-                                    "content-type": "application/json"
-                                }
-                            }).then((res) => {
-                               return res.json();
-                            }).then((data) => {
-                                console.log(data)
-                                localStorage.setItem("token", data.token)
-                            })
+
+
+
+
+
+
+                                        fetch("https://fantastic-happiness-jjrgp4974647f5rr5-45977.app.github.dev/"+"admin/signup", {
+                                            method: "POST",
+                                            body: JSON.stringify({
+                                                username,
+                                                password
+                                            }),
+                                            headers: {
+                                                "content-type": "application/json"
+                                            }
+                                        }).then((res) => {
+                                           return res.json();
+                                        }).then((data) => {
+                                            console.log("d")
+                                            console.log(data)
+                                            localStorage.setItem("token", data.token)
+                                        })
+                                    
+
+
+                            
                         }}
                         size={"large"}
                         variant="outlined"
