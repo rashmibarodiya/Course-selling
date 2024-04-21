@@ -9,10 +9,9 @@ function App() {
   return (
     <>
       <div style={{width:"100vw", height:"100vh", backgroundColor:"#eeeeee"}}>
-       <Appbar></Appbar>
 
         <Router>
-
+        <Appbar></Appbar>
           <Routes>
             <Route path ="login" element ={<Signin/>}></Route>
             <Route path ="signup" element ={<Signup/>}></Route>

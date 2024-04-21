@@ -2,13 +2,16 @@
 
 import { Button, Typography, Card, TextField } from "@mui/material"
 import { useState } from "react"
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
 function Signup() {
    // require('dotnev').config()
    // const backendUrl= process.env.BACKEND_URL;
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-
+    //const url = `https://fantastic-happiness-jjrgp4974647f5rr5-8000.app.github.dev/admin/signup`;
+ const url = 'admin/signup'
+ 
 
     return (
         <>
@@ -63,7 +66,7 @@ function Signup() {
 
 
 
-                                        fetch("https://fantastic-happiness-jjrgp4974647f5rr5-45977.app.github.dev/"+"admin/signup", {
+                                        fetch(url, {
                                             method: "POST",
                                             body: JSON.stringify({
                                                 username,
@@ -78,6 +81,7 @@ function Signup() {
                                             console.log("d")
                                             console.log(data)
                                             localStorage.setItem("token", data.token)
+                                            alert(" Admin signup successful")
                                         })
                                     
 

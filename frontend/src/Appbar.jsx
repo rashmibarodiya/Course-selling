@@ -1,6 +1,10 @@
 import { Button, Typography } from "@mui/material"
 
+import { useNavigate } from 'react-router-dom';
+
 function Appbar(){
+
+   const navigate  = useNavigate()
 return(
     <>
     <div style={{
@@ -16,7 +20,9 @@ return(
         <div style={{marginRight:10}}>
         <Button  variant={"outlined"}
         onClick={() => {
-            window.location = "/signup"
+    // window.location = `/signup`
+            // alert("hi")
+            navigate('/signup') 
         }}
         >Signup</Button> 
         </div>
@@ -24,7 +30,8 @@ return(
         <div>
         <Button variant={"outlined"}
         onClick={() => {
-            window.location = "/login"
+          //  window.location = `/login`
+            navigate('/login')
         }}
         >Signin</Button>
         </div>

@@ -1,0 +1,9 @@
+{
+    "name":"My Codespace",
+    "settings":{
+        "terminal.integrated.env.linux":{
+            "BACKEND_URL": "https://example.com",
+            "PORT" :"3000"
+        }
+    }
+}
