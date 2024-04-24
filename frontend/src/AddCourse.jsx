@@ -9,6 +9,7 @@ function AddCourse() {
     const [title, setTitle] = useState('');
     const [des, setDes] = useState('');
     const [img, setImg] = useState('');
+    const url = `https://fantastic-happiness-jjrgp4974647f5rr5-8000.app.github.dev/admin/courses`
     return <>
 
 
@@ -57,7 +58,30 @@ function AddCourse() {
                 </TextField>
                 <br /><br />
 
-                <Button size="large" variant={"outlined"}>Add Course</Button>
+                <Button size="large" variant={"outlined"}
+                
+                onClick={()=>{
+                    fetch(`${url}` ,{
+                        method:'POST',
+                        body: JSON.stringify({
+                            title,
+                            des,
+                            img,
+                            published : true
+                        }),
+                        headers:{
+                            "Content-type":"application/json",
+                            "Authorization" : "Bearer "+localStorage.getItem("token")
+                        }
+                    }).then((res)=>{
+                        res.json().then((data)=>{
+                            alert("Course added successfully")
+                            console.log("data : "+data)
+                        })
+                    })
+                }}
+                
+                >Add Course</Button>
             </Card>
 
         </div>

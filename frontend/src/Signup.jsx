@@ -9,8 +9,10 @@ function Signup() {
    // const backendUrl= process.env.BACKEND_URL;
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    //const url = `https://fantastic-happiness-jjrgp4974647f5rr5-8000.app.github.dev/admin/signup`;
- const url = 'admin/signup'
+    const url = `https://fantastic-happiness-jjrgp4974647f5rr5-8000.app.github.dev/admin/signup`;
+
+    
+ //const url = 'admin/signup'
  
 
     return (
@@ -61,11 +63,6 @@ function Signup() {
                     <Button
                         onClick={() => {
 
-
-
-
-
-
                                         fetch(url, {
                                             method: "POST",
                                             body: JSON.stringify({
@@ -83,9 +80,6 @@ function Signup() {
                                             localStorage.setItem("token", data.token)
                                             alert(" Admin signup successful")
                                         })
-                                    
-
-
                             
                         }}
                         size={"large"}
