@@ -49,6 +49,7 @@ app.get('/',(req, res)=>{
 
 // Admin routes
 app.post("/admin/signup", (req, res) => {
+  console.log("i am not getting this")
   var username = req.body.username;
   var password = req.body.password;
   var admin = ADMINS.find(a => a.username === username && a.password === password);
@@ -128,6 +129,10 @@ app.put("/admin/courses/:courseId", authentication, (req, res) => {
 })
 
 
+app.get("/admin/me", authentication,(req, res) => {
+ 
+  res.status(200).send(req.user.username)
+})
 
 app.get("/admin/courses", authentication, (req, res) => {
   // logic to get all courses
