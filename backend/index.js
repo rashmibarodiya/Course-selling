@@ -49,7 +49,7 @@ app.get('/',(req, res)=>{
 
 // Admin routes
 app.post("/admin/signup", (req, res) => {
-  console.log("i am not getting this")
+ // console.log("i am not getting this")
   var username = req.body.username;
   var password = req.body.password;
   var admin = ADMINS.find(a => a.username === username && a.password === password);
@@ -90,14 +90,14 @@ app.post("/admin/courses", authentication, (req, res) => {
 
   var title = req.body.title;
   var description = req.body.description;
-
+  var img = req.body.imageLink
 
   var course = {
     courseId: ++val,
     title: title,
     description: description,
     price: 100,
-    imageLink: "https://linktoimage.com",
+    imageLink: img,
     published: true
   };
 
