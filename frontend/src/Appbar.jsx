@@ -5,11 +5,12 @@ import { useNavigate } from 'react-router-dom';
 function Appbar() {
 
     const navigate = useNavigate();
-    const found = false
+    
     const [username, setUsername] =  useState("")
     const url = `https://fantastic-happiness-jjrgp4974647f5rr5-8000.app.github.dev/admin/me`;
     useEffect(() => {
         const token = localStorage.getItem("token");
+        console.log("token :: "+token)
         
             fetch(`${url}`, {
                 method: 'GET',
@@ -17,14 +18,17 @@ function Appbar() {
                     "authorization": `Bearer ${localStorage.getItem("token")}`
                 }
             }).then((res) => {
-                res.json().then((data) => {
-                    setUsername(data.username)
-                 //   found = true
-                    console.log("DATA : " + data);
-                });
-            }).catch((err) => {
-                console.error(err);
-            });
+                if (res.ok) {
+                    return res.text().then((data) => {
+                        setUsername(data);
+                        console.log("DATA : " + data);
+                    });
+                } else {
+                    return res.text().then((text) => {
+                        console.log("Non-JSON Response: " + text);
+                    });
+                }
+            })
         
     }, []);
 
@@ -33,7 +37,8 @@ function Appbar() {
        return (
         
          <>
-         fjdsfjlksjfljdsfj
+       
+         
             <div style={{
                 display: "flex",
                 justifyContent: "space-between"
@@ -62,6 +67,7 @@ function Appbar() {
 
     return (
         <>
+        
             <div style={{
                 display: "flex",
                 justifyContent: "space-between"

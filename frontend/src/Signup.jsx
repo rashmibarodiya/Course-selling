@@ -79,6 +79,7 @@ function Signup() {
                                             console.log(data)
                                             localStorage.setItem("token", data.token)
                                             alert(" Admin signup successful")
+                                            
                                         })
                             
                         }}

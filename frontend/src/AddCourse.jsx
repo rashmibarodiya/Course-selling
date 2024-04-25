@@ -7,8 +7,8 @@ import { useState } from "react";
 function AddCourse() {
 
     const [title, setTitle] = useState('');
-    const [des, setDes] = useState('');
-    const [img, setImg] = useState('');
+    const [description, setDescription] = useState('');
+    const [imageLink, setImg] = useState('');
     const url = `https://fantastic-happiness-jjrgp4974647f5rr5-8000.app.github.dev/admin/courses`
     return <>
 
@@ -39,7 +39,7 @@ function AddCourse() {
                 <TextField
                     fullWidth
                     onChange={(e) => {
-                        setDes(e.target.value)
+                        setDescription(e.target.value)
                     }}
                     label={"Description"}
                     variant={"outlined"}>
@@ -65,8 +65,8 @@ function AddCourse() {
                         method:'POST',
                         body: JSON.stringify({
                             title,
-                            des,
-                            img,
+                            description,
+                            imageLink,
                             published : true
                         }),
                         headers:{
