@@ -8,7 +8,7 @@ function AddCourse() {
 
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
-    const [imageLink, setImg] = useState('');
+    const [imageLink, setImageLink] = useState('');
     const url = `https://fantastic-happiness-jjrgp4974647f5rr5-8000.app.github.dev/admin/courses`
     return <>
 
@@ -50,7 +50,7 @@ function AddCourse() {
                 <TextField
                     fullWidth
                     onChange={(e) => {
-                        setImg(e.target.value)
+                        setImageLink(e.target.value)
                     }}
                     label={"Image Link"}
                     variant={"outlined"}>
