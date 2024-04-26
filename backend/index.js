@@ -128,6 +128,19 @@ app.put("/admin/courses/:courseId", authentication, (req, res) => {
   });
 })
 
+app.get("/admin/courses/:courseId", authentication, (req, res) => {
+  // logic to get a course
+  var courseId = req.params.courseId
+
+  var course = COURSES[courseId - 1]
+  if(!course) res.status(404).send({
+    id: courseId,
+    message:" coures not found"
+  })
+  
+  res.status(200).json(course);
+})
+
 
 app.get("/admin/me", authentication,(req, res) => {
  
