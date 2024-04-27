@@ -120,7 +120,11 @@ app.put("/admin/courses/:courseId", authentication, (req, res) => {
   var course = COURSES[courseId - 1]
   course.title = req.body.title;
   course.description = req.body.description;
-  course.img = "https://updatedlinktoimage.com";
+
+  course.imageLink = req.body.imageLink
+
+  
+  
 
   res.status(200).send({
     message: "Course updated successfully",
