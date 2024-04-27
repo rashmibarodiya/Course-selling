@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { Button, Typography, Card, TextField } from "@mui/material"
+import { Button, Typography, Card } from "@mui/material"
 import { useNavigate } from 'react-router-dom';
 
 
@@ -67,10 +67,14 @@ function CardShape(props) {
                 <Typography align="center">{title}</Typography>
 
                 <Typography align="center">{description}</Typography>
-                <img src={imageLink} alt={title} style={{ width: '100%', height: 300 }} />
-                <Button variant="outlined"
+                <img src={imageLink} style={{ width: '100%', height: 300 }} />
 
 
+
+                <Button variant={"outlined"}
+                    onClick={() => {
+                        navigate(`${props.course.courseId}`);
+                    }}
                 >edit</Button>
             </Card>
         </div>

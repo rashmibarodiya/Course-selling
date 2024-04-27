@@ -75,6 +75,7 @@ function AddCourse() {
                         }
                     }).then((res)=>{
                         res.json().then((data)=>{
+                            console.log(imageLink);
                             alert("Course added successfully")
                             console.log("data : "+data)
                         })

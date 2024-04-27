@@ -7,7 +7,8 @@ import Appbar from './Appbar.jsx'
 import AddCourse from './AddCourse.jsx';
 import Courses from './Courses.jsx'
 import Course from './Course.jsx'
-function App() {
+import { RecoilRoot } from 'recoil';
+function App() {  
 
   return (
     <>
@@ -15,6 +16,7 @@ function App() {
 
         <Router>
           <Appbar></Appbar>
+          <RecoilRoot>
           <Routes>
             <Route path="courses/:courseId" element={<Course />}></Route>
             <Route path="courses" element={<Courses />}></Route>
@@ -22,6 +24,7 @@ function App() {
             <Route path="login" element={<Signin />}></Route>
             <Route path="signup" element={<Signup />}></Route>
           </Routes>
+          </RecoilRoot>
         </Router>
 
       </div>
