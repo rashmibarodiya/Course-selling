@@ -7,12 +7,12 @@ function Appbar() {
     const navigate = useNavigate();
     
     const [username, setUsername] =  useState("")
-    const url = `https://fantastic-happiness-jjrgp4974647f5rr5-8000.app.github.dev/admin/me`;
+    const url = `https://fantastic-happiness-jjrgp4974647f5rr5-8000.app.github.dev`;
     useEffect(() => {
         const token = localStorage.getItem("token");
         console.log("token :: "+token)
         
-            fetch(`${url}`, {
+            fetch(`${url}`+`/admin/me`, {
                 method: 'GET',
                 headers: {
                     "authorization": `Bearer ${localStorage.getItem("token")}`
@@ -40,6 +40,7 @@ function Appbar() {
        
          
             <div style={{
+                
                 display: "flex",
                 justifyContent: "space-between"
             }}>
@@ -48,7 +49,24 @@ function Appbar() {
                     <Typography fontSize={20}>Coursera</Typography>
                 </div>
 
-                <div style={{ display: "flex", padding: 20 }}>
+                <div style={{marginTop:10, display: "flex",justifyContent:"space-between",gap: 10}}>
+                    <div >
+                        <Button variant={"outlined"}
+                        
+                        onClick={() =>{
+                            navigate( '/AddCourse')
+                        }}>Add Course
+                        </Button>
+                    </div>
+                    <div >
+                        <Button variant={"outlined"}
+                        
+                        onClick={() =>{
+                            navigate( '/Courses')
+                        }}>Courses
+                        </Button>
+                    </div>
+
                     <div style={{ marginRight: 10 }}>
                         <Button variant={"outlined"}
                             onClick={() => {
