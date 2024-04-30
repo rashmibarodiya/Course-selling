@@ -63,6 +63,8 @@ function Signup() {
                     <Button
                         onClick={() => {
 
+                            alert("hi")
+
                                         fetch(url, {
                                             method: "POST",
                                             body: JSON.stringify({

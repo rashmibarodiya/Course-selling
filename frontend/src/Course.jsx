@@ -43,7 +43,12 @@ function Course() {
 function CourseCard(props) {
   const { courseId } = props;
   const courses = useRecoilValue(courseState);
-  let course = courses[courseId-1]
+  let course = null
+  courses.map((a) => {
+    if(a._id == courseId){
+      course = a;
+    }
+  })
   if (!course) return <div>loading.ll...</div>;
 console.log("hi::::"+course.imageLink)
   return (
@@ -64,7 +69,12 @@ function UpdateCard(props) {
   const [imageLink, setImageLink] = useState('');
 
   const [courses, setCourses] = useRecoilState(courseState);
-  let course = courses[courseId-1]
+  let course = null
+  courses.map((a) => {
+    if(a._id == courseId){
+      course = a;
+    }
+  })
   if (!course) return <div>loading....</div>;
 
   return (
