@@ -125,7 +125,7 @@ app.post('/admin/courses', authenticateJwt, async (req, res) => {
   // logic to create a course
 var {title, description,imageLink} = req.body;
 
-  const course = new Course({title: title, description: description,imageLink:imageLink})
+  const course = new Course({title: title, description: description, imageLink:imageLink})
   await course.save();
   res.json({ message: 'Course created successfully', courseId: course.id });
   
