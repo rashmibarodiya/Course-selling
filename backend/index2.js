@@ -114,9 +114,11 @@ app.post('/admin/login', async (req, res) => {
   var {username, password} = req.body;
   var admin = await Admin.findOne({username: username, password: password })
   if (admin) {
-    const token = jwt.sign({ username, role: 'admin' }, SECRET, { expiresIn: '1h' });
+    const token = jwt.sign({ username }, SECRET, { expiresIn: '1h' });
+    console.log("hi")
     res.json({ message: 'Admin login succesfully', token });
   } else {
+    console.log("not found")
     res.status(404).json({ message: 'Admin not found' });
   }
 });
@@ -151,7 +153,7 @@ app.get('/admin/courses', authenticateJwt, async (req, res) => {
   // logic to get all courses
   
   var courses = await Course.find({})
-  console.log(courses)
+  // console.log(courses)
   res.json(courses);
 });
 
