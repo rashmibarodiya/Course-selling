@@ -9,7 +9,6 @@ function Courses() {
 
     useEffect(() => {
         console.log("111111111")
-        alert("i am in")
         const url = `https://fantastic-happiness-jjrgp4974647f5rr5-8000.app.github.dev/admin/courses`;
         fetch(url, {
             method: 'GET',
