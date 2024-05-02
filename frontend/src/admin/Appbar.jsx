@@ -2,7 +2,7 @@ import { Button, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 
-function Appbar() {
+ export function Appbar() {
 
     const navigate = useNavigate();
 
