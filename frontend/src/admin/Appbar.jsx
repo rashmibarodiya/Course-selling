@@ -69,7 +69,7 @@ import { useNavigate } from 'react-router-dom';
                             <Button variant={"outlined"}
 
                                 onClick={() => {
-                                    navigate('/Courses')
+                                    navigate('admin/Courses')
                                 }}>Courses
                             </Button>
                         </div>
@@ -107,7 +107,7 @@ import { useNavigate } from 'react-router-dom';
                     <div style={{ marginRight: 10 }}>
                         <Button variant={"outlined"}
                             onClick={() => {
-                                navigate('/signup');
+                                navigate('admin/signup');
                             }}
                         >Signup</Button>
                     </div>
@@ -116,7 +116,7 @@ import { useNavigate } from 'react-router-dom';
                         <Button variant={"outlined"}
                             onClick={() => {
 
-                                navigate('/login');
+                                navigate('admin/login');
 
                             }}
                         >Signin</Button>

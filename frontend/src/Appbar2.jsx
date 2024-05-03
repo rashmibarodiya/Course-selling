@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Button, Typography } from "@mui/material";
 import { useNavigate } from 'react-router-dom';
 import { Appbar } from "./admin/Appbar.jsx";
+import { Userbar } from "./user/Userbar.jsx";
 
 function Appbar2() {
     const [role, setRole] = useState("");
@@ -20,7 +21,7 @@ function Appbar2() {
                 </div>
             ) : (
                 <div>
-                    user
+                    <Userbar/>
                 </div>
             )}
         </div>

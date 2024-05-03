@@ -62,6 +62,7 @@ function Signin() {
                                     "Content-type":"application/json"
                                 }
                             })
+                            console.log("test :::"+res.data.token)
                             localStorage.setItem("token", res.data.token)
                             window.location = "/"
                         }}
