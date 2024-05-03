@@ -56,6 +56,7 @@ mongoose.connect(mongId,
 
 function authenticateJwt(req, res, next) {
   const authHeader = req.headers.authorization;
+  console.log("token :: "+authHeader)
   if (authHeader) {
     const token = authHeader.split(' ')[1];
     new Promise((resolve, reject) => {
@@ -81,6 +82,11 @@ function authenticateJwt(req, res, next) {
 
 
 app.get("/admin/me", authenticateJwt,(req, res) => {
+ 
+  res.status(200).send(req.user.username)
+})
+
+app.get("/user/me", authenticateJwt,(req, res) => {
  
   res.status(200).send(req.user.username)
 })
@@ -167,7 +173,7 @@ app.post('/users/signup', async(req, res) => {
   }
   const newUser = new User({ username, password });
   await newUser.save();
-  const token = jwt.sign({ username, role: 'user' }, SECRET, { expiresIn: '1h' });
+  const token = jwt.sign({ username }, SECRET, { expiresIn: '1h' });
   res.json({ message: 'User created successfully', token });
 });
 
@@ -176,17 +182,18 @@ app.post('/users/login', async(req, res) => {
   var {username, password} = req.body;
   var user = await User.findOne({username: username })
   if (user) {
-    const token = jwt.sign({ username, role: 'user' }, SECRET, { expiresIn: '1h' });
+    const token = jwt.sign({ username }, SECRET, { expiresIn: '1h' });
     res.json({ message: 'User login succesfully', token });
   } else {
     res.status(404).json({ message: 'User not found' });
   }
 });
 
-app.get('/users/courses', authenticateJwt,async(req, res) => {
+app.get('/user/courses', authenticateJwt,async(req, res) => {
   // logic to list all courses
   var courses = await Course.find({published: true})
-  res.json({ courses: courses });
+  // console.log(courses)
+  res.json(courses);
 });
 
 const { ObjectId } = require('mongodb');
