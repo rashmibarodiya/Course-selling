@@ -8,7 +8,7 @@ function Signup() {
   
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const url = `https://fantastic-happiness-jjrgp4974647f5rr5-8000.app.github.dev/user/signup`;
+    const url = `https://fantastic-happiness-jjrgp4974647f5rr5-8000.app.github.dev/users/signup`;
 
     
  
@@ -62,8 +62,7 @@ function Signup() {
                     <Button
                         onClick={() => {
 
-                            alert("hi")
-
+                            
                                         fetch(url, {
                                             method: "POST",
                                             body: JSON.stringify({
@@ -79,7 +78,7 @@ function Signup() {
                                             console.log("d")
                                             console.log(data)
                                             localStorage.setItem("token", data.token)
-                                            alert(" Admin signup successful")
+                                            alert(" User signup successful")
                                             
                                         })
                             

@@ -6,7 +6,7 @@ import axios from 'axios'
 
 function Signin() {
 
-    const url = `https://fantastic-happiness-jjrgp4974647f5rr5-8000.app.github.dev/user/login`
+    const url = `https://fantastic-happiness-jjrgp4974647f5rr5-8000.app.github.dev/users/login`
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     return (
