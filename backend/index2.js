@@ -23,7 +23,7 @@ console.log(SECRET)
 const userSchema = new mongoose.Schema({
   username: String,
   password: String,
-  purchasedCourses: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Course' }]
+  purchasedCourses: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Courses' }]
 });
 
 
@@ -56,7 +56,7 @@ mongoose.connect(mongId,
 
 function authenticateJwt(req, res, next) {
   const authHeader = req.headers.authorization;
-  console.log("token :: "+authHeader)
+  //console.log("token :: "+authHeader)
   if (authHeader) {
     const token = authHeader.split(' ')[1];
     new Promise((resolve, reject) => {
@@ -200,7 +200,7 @@ const { ObjectId } = require('mongodb');
 
 app.post('/users/courses/:courseId', authenticateJwt, async (req, res) => {
   const course = await Course.findById(req.params.courseId);
-  console.log(course);
+ // console.log(course);
   if (course) {
     const user = await User.findOne({ username: req.user.username });
     if (user) {
@@ -219,7 +219,9 @@ app.post('/users/courses/:courseId', authenticateJwt, async (req, res) => {
 
 app.get('/users/purchasedCourses',authenticateJwt, async (req, res) => {
   // logic to view purchased courses
+ // console.log("i am in")
   const user = await User.findOne({ username: req.user.username }).populate('purchasedCourses');
+  //console.log("user :"+user)
   if (user) {
     res.json({ purchasedCourses: user.purchasedCourses || [] });
   } else {
