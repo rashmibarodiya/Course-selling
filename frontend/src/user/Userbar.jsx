@@ -62,7 +62,7 @@ import { useNavigate } from 'react-router-dom';
 
                                 onClick={() => {
                                     navigate('user/purchasedCourse')
-                                }}>My course
+                                }}>My courses
                             </Button>
                         </div>
                         <div >
@@ -78,6 +78,8 @@ import { useNavigate } from 'react-router-dom';
                             <Button variant={"outlined"}
                                 onClick={() => {
                                     localStorage.setItem("token", null)
+                                    navigate = "/"
+                                    //window.location("/")
                                 }}
                             >Logout</Button>
                         </div>

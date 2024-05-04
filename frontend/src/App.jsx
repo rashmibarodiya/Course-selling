@@ -5,15 +5,15 @@ import AdminSignup from "./admin/Signup.jsx"
 import AdminSignin from './admin/Signin.jsx'
 import UserSignup from "./user/Signup.jsx"
 import UserSignin from './user/Signin.jsx'
-import Appbar from './admin/Appbar.jsx'
 import Appbar2 from './Appbar2.jsx'
 import AddCourse from './admin/AddCourse.jsx';
 import AdminCourses from './admin/Courses.jsx'
 import UserCourses from './user/Courses.jsx'
 import Course from './admin/Course.jsx'
 import { RecoilRoot } from 'recoil';
-import { useState } from "react";
+
 import PurchasedCourse from './user/PurchasedCourse.jsx';
+
 function App() {
 
   // State to keep track of the selected user type
@@ -28,7 +28,7 @@ function App() {
           <Appbar2></Appbar2>
           <RecoilRoot>
             <Routes>
-              {/* <Route path="admin" element={<Appbar />} /> */}
+              {/* <Route path="user" element={<Userbar />} /> */}
               {/* <Route path="cs" element={<Appbar2 />}></Route> */}
 
               <Route path="courses/:courseId" element={<Course />}></Route>

@@ -3,6 +3,7 @@
 import { Button, Typography, Card, TextField } from "@mui/material"
 import{useState} from 'react'
 import axios from 'axios'
+import { Navigate } from "react-router-dom";
 
 function Signin() {
 
@@ -62,9 +63,10 @@ function Signin() {
                                     "Content-type":"application/json"
                                 }
                             })
-                            console.log("test :::"+res.data.token)
+                            
                             localStorage.setItem("token", res.data.token)
-                            window.location = "/"
+                            
+                          //  window.location = "/"
                         }}
 
 

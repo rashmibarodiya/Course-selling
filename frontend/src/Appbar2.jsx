@@ -33,9 +33,9 @@ function Classic({ setRole }) {
 
     return (
         <>
-            jkjhkjhkjhkjhkj
+            
             <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <Typography>Coursera</Typography>
+                <Typography fontSize={20} variant="body1" style={{ color: '#333' }}>Coursera</Typography>
                 <div>
                     <Button
                         onClick={() => {
