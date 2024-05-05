@@ -47,7 +47,7 @@ function CardShape({ course }) {
     const { title, description, imageLink } = course;
     return (
         <div>
-            <Card variant="outlined">
+            <Card variant="outlined" style={{  borderRadius : 10}}>
                 <Typography align="center">{title}</Typography>
                 <Typography align="center">{description}</Typography>
                 <img src={imageLink} style={{ width: '100%', height: 300 }} />

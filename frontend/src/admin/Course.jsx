@@ -79,8 +79,8 @@ function UpdateCard(props) {
 
   return (
     <div>
-      <Card variant="outlined" style={{ marginTop: 10, minHeight: 200, marginRight: 20, width: 300, padding: 10 }}>
-        <TextField fullWidth onChange={(e) => setTitle(e.target.value)} label={"Title"} variant={"outlined"} />
+      <Card variant="outlined" style={{ marginTop: 10, minHeight: 200, marginRight: 20, width: 300, padding: 10  , borderRadius : 10}}>
+        <TextField fullWidth onChange={(e) => setTitle(e.target.value)} label={"Title"} variant={"outlined" } />
         <br /><br />
         <TextField fullWidth onChange={(e) => setDescription(e.target.value)} label={"Description"} variant={"outlined"} />
         <br /><br />

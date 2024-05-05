@@ -29,7 +29,7 @@ function Signin() {
                 justifyContent: "center"
             }}>
 
-                <Card variant='outlined' style={{ width: 300, padding: 20 }} >
+                <Card variant='outlined' style={{ width: 300, padding: 20 , borderRadius : 10}} >
                     <TextField
                         onChange={(e) => {
                             setUsername(e.target.value)
@@ -54,6 +54,7 @@ function Signin() {
                     <br />
                     <br />
                     <Button size={"large"} variant="outlined"
+                    
                         onClick={async () => {
                             let res = await axios.post(`${url}`, {
                                 username: username,
@@ -66,7 +67,7 @@ function Signin() {
                             
                             localStorage.setItem("token", res.data.token)
                             
-                          //  window.location = "/"
+                            window.location = "/"
                         }}
 
 

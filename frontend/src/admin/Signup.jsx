@@ -35,8 +35,9 @@ function Signup() {
                 justifyContent: "center"
             }}>
 
-                <Card variant='outlined' style={{ width: 300, padding: 20 }} >
+                <Card variant='outlined' style={{ width: 300, padding: 20  , borderRadius : 10 }} >
                     <TextField
+                   // value={username}
                         onChange={(e) => {
                             setUsername(e.target.value)
                         }}
@@ -80,6 +81,7 @@ function Signup() {
                                             console.log("d")
                                             console.log(data)
                                             localStorage.setItem("token", data.token)
+                                            window.location("/")
                                             alert(" Admin signup successful")
                                             
                                         })

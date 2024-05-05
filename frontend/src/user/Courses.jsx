@@ -8,7 +8,7 @@ function Courses() {
 
 
     useEffect(() => {
-        console.log("111111111")
+       
         const url = `https://fantastic-happiness-jjrgp4974647f5rr5-8000.app.github.dev/user/courses`;
         fetch(url, {
             method: 'GET',
@@ -83,6 +83,7 @@ function CardShape(props) {
                 marginRight: 20,
                 width: 300,
                 padding: 10
+                , borderRadius : 10
             }}>
                 <Typography align="center">{title}</Typography>
 

@@ -65,7 +65,10 @@ function Signin() {
                                 }
                             })
                             localStorage.setItem("token", res.data.token)
-                           window.location("/")
+                            window.location ="/" 
+                         
+                            alert("navigated")
+                        //    
                         }}
 
 

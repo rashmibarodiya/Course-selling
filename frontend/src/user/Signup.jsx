@@ -34,7 +34,7 @@ function Signup() {
                 justifyContent: "center"
             }}>
 
-                <Card variant='outlined' style={{ width: 300, padding: 20 }} >
+                <Card variant='outlined' style={{ width: 300, padding: 20  , borderRadius : 10 }} >
                     <TextField
                         onChange={(e) => {
                             setUsername(e.target.value)

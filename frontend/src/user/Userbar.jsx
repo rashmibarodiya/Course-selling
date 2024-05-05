@@ -22,6 +22,7 @@ import { useNavigate } from 'react-router-dom';
                 return res.text().then((data) => {
                     setUsername(data);
                     console.log("DATA : " + data);
+                    // window.location = "/"
                 });
             } else {
                 return res.text().then((text) => {
@@ -78,8 +79,8 @@ import { useNavigate } from 'react-router-dom';
                             <Button variant={"outlined"}
                                 onClick={() => {
                                     localStorage.setItem("token", null)
-                                    navigate = "/"
-                                    //window.location("/")
+                                    //navigate("/")
+                                    window.location = "/"
                                 }}
                             >Logout</Button>
                         </div>

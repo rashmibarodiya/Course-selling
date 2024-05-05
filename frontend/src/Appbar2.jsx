@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Typography } from "@mui/material";
 import { useNavigate } from 'react-router-dom';
-import { Appbar } from "./admin/Appbar.jsx";
+import { Adminbar } from "./admin/Adminbar.jsx";
 import { Userbar } from "./user/Userbar.jsx";
 
 function Appbar2() {
@@ -17,11 +17,11 @@ function Appbar2() {
                 <Classic setRole={handleRoleSelect} />
             ) : role === "Admin" ? (
                 <div>
-                    <Appbar />
+                    <Adminbar />
                 </div>
             ) : (
                 <div>
-                    <Userbar/>
+                    <Userbar />
                 </div>
             )}
         </div>
@@ -29,32 +29,53 @@ function Appbar2() {
 }
 
 function Classic({ setRole }) {
-    
+
 
     return (
         <>
-            
-            <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <Typography fontSize={20} variant="body1" style={{ color: '#333' }}>Coursera</Typography>
-                <div>
-                    <Button
-                        onClick={() => {
-                            setRole("Admin");
-                        }}
-                        variant="outlined"
-                    >
-                        Admin
-                    </Button>
-                    <Button
-                        onClick={() => {
-                            setRole("User");
-                        }}
-                        variant="outlined"
-                    >
-                        User
-                    </Button>
+            <div style={{ display: "flex", justifyContent: "space-between", padding :10}} >
+
+                    <div >
+                        <Typography fontSize={20} variant="body1" style={{ color: '#333' }}>Coursera</Typography>
+                    </div>
+
+                    <div style={{ display: "flex", justifyContent: "space-between", gap : 10}}>
+
+                    <div >
+                        <Button
+                            onClick={() => {
+                                setRole("Admin");
+                            }}
+                            variant="outlined"
+                        >
+                            Admin
+                        </Button>
+                    </div>
+
+                        <div>
+                        <Button
+                            onClick={() => {
+                                setRole("User");
+                                // window.location = "/Userbar"
+                            }}
+                            variant="outlined"
+                        >
+                            User
+                        </Button>
+                        </div>
+
+                        </div>
+                    </div>
+               
+                <div style={{
+                    marginTop:75,
+                    color: "#303030" 
+                    
+                }}>
+                            <Typography fontSize={60} align = "center" fontStyle = "initial">Welcome to Coursera</Typography>
                 </div>
-            </div>
+               
+         
         </>
     );
 }
