@@ -1,12 +1,17 @@
 import { Button, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
+import {userName} from './state/atoms/Username.jsx'
+import { useSetRecoilState,useRecoilValue } from 'recoil';
+
 
  export function Adminbar() {
 
     const navigate = useNavigate();
+    const username = useRecoilValue(userName)
+    const setUsername = useSetRecoilState(userName)
 
-    const [username, setUsername] = useState("")
+   // const [username, setUsername] = useState("")
     const url = `https://fantastic-happiness-jjrgp4974647f5rr5-8000.app.github.dev`;
     useEffect(() => {
         const token = localStorage.getItem("token");
@@ -37,7 +42,7 @@ import { useNavigate } from 'react-router-dom';
         return (
 
             <>
-            jhdhsflkjslfj
+          
 
                 <div style={{
                     display: "flex",
@@ -53,8 +58,8 @@ import { useNavigate } from 'react-router-dom';
                 }}>
 
 
-                    <div style={{ padding: 20 }}>
-                        <Typography fontSize={1}>Coursera</Typography>
+                    <div >
+                        <Typography fontSize={20}>Coursera</Typography>
                     </div>
 
                     <div style={{ marginTop: 10, display: "flex", justifyContent: "space-between", gap: 10 }}>

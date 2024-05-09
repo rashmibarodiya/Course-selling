@@ -3,18 +3,19 @@ import { Button, Typography } from "@mui/material";
 import { useNavigate } from 'react-router-dom';
 import { Adminbar } from "./admin/Adminbar.jsx";
 import { Userbar } from "./user/Userbar.jsx";
+import {userRole} from './state/atoms/Username.jsx'
+import { useSetRecoilState,useRecoilValue } from 'recoil';
 
 function Appbar2() {
-    const [role, setRole] = useState("");
+    const role = useRecoilValue(userRole);
+   
 
-    const handleRoleSelect = (selectedRole) => {
-        setRole(selectedRole);
-    };
+    
 
     return (
         <div>
             {!role ? (
-                <Classic setRole={handleRoleSelect} />
+                <Classic />
             ) : role === "Admin" ? (
                 <div>
                     <Adminbar />
@@ -27,10 +28,9 @@ function Appbar2() {
         </div>
     );
 }
+function Classic() {
 
-function Classic({ setRole }) {
-
-
+    const setRole = useSetRecoilState(userRole);
     return (
         <>
             <div style={{ display: "flex", justifyContent: "space-between", padding :10}} >
@@ -81,3 +81,6 @@ function Classic({ setRole }) {
 }
 
 export default Appbar2;
+
+
+

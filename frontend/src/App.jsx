@@ -11,10 +11,12 @@ import AdminCourses from './admin/Courses.jsx'
 import UserCourses from './user/Courses.jsx'
 import Course from './admin/Course.jsx'
 import { RecoilRoot } from 'recoil';
-
 import PurchasedCourse from './user/PurchasedCourse.jsx';
 
+
 function App() {
+
+  
 
   // State to keep track of the selected user type
 
@@ -22,16 +24,15 @@ function App() {
 
   return (
     <>
+    <RecoilRoot>
      <div style={{ width: "100vw", height: "100vh", backgroundColor: "#eeeeee" }}>
       {/* <div style={{ width: "100vw", height: "100vh", backgroundColor: "#FDF5DF" }}> */}
 
         <Router>
-          <Appbar2></Appbar2>
-          <RecoilRoot>
+         
+          
+           <Appbar2></Appbar2>
             <Routes>
-              {/* <Route path="user" element={<Userbar />} /> */}
-              {/* <Route path="cs" element={<Appbar2 />}></Route> */}
-
               <Route path="courses/:courseId" element={<Course />}></Route>
               <Route path="admin/courses" element={<AdminCourses />}></Route>
               <Route path="user/purchasedCourse" element={<PurchasedCourse />}></Route>
@@ -42,14 +43,20 @@ function App() {
               <Route path="user/login" element={<UserSignin />}></Route>
               <Route path="user/signup" element={<UserSignup />}></Route>
             </Routes>
-          </RecoilRoot>
+          
         </Router>
 
       </div>
 
-
+      </RecoilRoot>
     </>
   )
+}
+
+
+
+function Classic(){
+
 }
 
 export default App
