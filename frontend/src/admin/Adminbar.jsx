@@ -1,7 +1,7 @@
 import { Button, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
-import {userName} from './state/atoms/Username.jsx'
+import {userName} from '../state/atoms/Username.jsx'
 import { useSetRecoilState,useRecoilValue } from 'recoil';
 
 
@@ -25,7 +25,7 @@ import { useSetRecoilState,useRecoilValue } from 'recoil';
         }).then((res) => {
             if (res.ok) {
                 return res.text().then((data) => {
-                    setUsername(data);
+                    //setUsername(data);
                     console.log("DATA : " + data);
                 });
             } else {
@@ -84,13 +84,22 @@ import { useSetRecoilState,useRecoilValue } from 'recoil';
                             <Button variant={"outlined"}
                                 onClick={() => {
                                     localStorage.setItem("token", null)
-                                    window.location = "/"
+                                    window.location = "/" ///************************ */
                                 }}
                             >Logout</Button>
                         </div>
 
 
                     </div>
+
+
+                </div>
+
+                <div style={{
+                    display:"flex",
+                    justifyContent:"center"
+                }}  >
+                <img src={`https://www.buhave.com/wp-content/uploads/2019/05/education.jpg`} style={{ width: 'auto', height: 300 }} />
                 </div>
 
 
