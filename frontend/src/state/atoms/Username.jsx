@@ -2,7 +2,7 @@ import {atom} from "recoil"
 
 
 export const userName = atom({
-    key : 'userState',
+    key : 'userName',
     default : null
 })
  export const userRole = atom({
