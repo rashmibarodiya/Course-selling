@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useRecoilState, useRecoilValue,useSetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { Card, Typography, TextField, Button } from "@mui/material"
 import { atom } from "recoil";
 
@@ -31,8 +31,9 @@ function Course() {
 
   return (
     <div style={{
-        display : "flex",
-        justifyContent: "center"
+      display: "flex",
+      justifyContent: "space-around", 
+      marginTop: '100'
     }}>
       <CourseCard courseId={courseId}></CourseCard>
       <UpdateCard courseId={courseId} url={url}></UpdateCard>
@@ -45,15 +46,15 @@ function CourseCard(props) {
   const courses = useRecoilValue(courseState);
   let course = null
   courses.map((a) => {
-    if(a._id == courseId){
+    if (a._id == courseId) {
       course = a;
     }
   })
   if (!course) return <div>loading.ll...</div>;
-console.log("hi::::"+course.imageLink)
+  console.log("hi::::" + course.imageLink)
   return (
     <div>
-      <Card variant="outlined" style={{ marginTop: 10, minHeight: 200, marginRight: 20, width: 300, padding: 10 }}>
+      <Card variant="outlined" style={{ marginTop: 10, minHeight: 200, marginRight: 20, width: 300, padding: 10}}>
         <Typography align="center">{course.title}</Typography>
         <Typography align="center">{course.description}</Typography>
         <img src={course.imageLink} style={{ width: '100%', height: 300 }} />
@@ -71,20 +72,23 @@ function UpdateCard(props) {
   const [courses, setCourses] = useRecoilState(courseState);
   let course = null
   courses.map((a) => {
-    if(a._id == courseId){
+    if (a._id == courseId) {
       course = a;
     }
   })
   if (!course) return <div>loading....</div>;
 
   return (
-    <div>
-      <Card variant="outlined" style={{ marginTop: 10, minHeight: 200, marginRight: 20, width: 300, padding: 10  , borderRadius : 10}}>
-        <TextField fullWidth onChange={(e) => setTitle(e.target.value)} label={"Title"} variant={"outlined" } />
+    <div style={{}}>
+      <Card variant="outlined" style={{ marginTop: 10, minHeight: 200, marginRight: 20, width: 300, padding: 10, borderRadius: 10 }}>
+        <div>
+          <Typography align = "center">New value to be used</Typography>
+        </div>   
+        <TextField  value={title} fullWidth onChange={(e) => setTitle(e.target.value)} label={"Title"} variant={"outlined"} />
         <br /><br />
-        <TextField fullWidth onChange={(e) => setDescription(e.target.value)} label={"Description"} variant={"outlined"} />
+        <TextField value={description} fullWidth onChange={(e) => setDescription(e.target.value)} label={"Description"} variant={"outlined"} />
         <br /><br />
-        <TextField fullWidth onChange={(e) => setImageLink(e.target.value)} label={"Image Link"} variant={"outlined"} />
+        <TextField value={imageLink} fullWidth onChange={(e) => setImageLink(e.target.value)} label={"Image Link"} variant={"outlined"} />
         <br /><br />
         <Button size="large" variant={"outlined"} onClick={() => {
           fetch(`${url}/${courseId}`, {

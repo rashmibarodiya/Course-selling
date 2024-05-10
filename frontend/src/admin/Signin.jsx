@@ -3,14 +3,15 @@
 import { Button, Typography, Card, TextField } from "@mui/material"
 import{useState} from 'react'
 import axios from 'axios'
-import { Navigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import {userName} from '../state/atoms/Username.jsx'
 import { useSetRecoilState,useRecoilValue } from 'recoil';
 
 function Signin() {
-
+    const navigate = useNavigate();
     const url = `https://fantastic-happiness-jjrgp4974647f5rr5-8000.app.github.dev/admin/login`
     const [username, setUsername] = useState("");
+   // const user = useRecoilValue(userName)
     const x = useSetRecoilState(userName)
     const [password, setPassword] = useState("");
     return (
@@ -71,6 +72,7 @@ function Signin() {
                             localStorage.setItem("token", res.data.token)
                             x(username)
                             alert("user signin successfully")
+                            navigate('/')
                              //window.location = "/"
                         }}
 

@@ -15,7 +15,7 @@ function AddCourse() {
 
 
 
-        <div style={{ display: "flex", justifyContent: "center" }}>
+        <div style={{ display: "flex", justifyContent: "center" ,zIndex : 1 , marginTop : 0}}>
 
             <Typography fontSize={22} style={{
                 marginTop: 30
@@ -24,7 +24,7 @@ function AddCourse() {
         <div style={{ display: "flex", justifyContent: "center" }}>
             <Card variant={"outlined"} style={{
                 marginTop: 5,
-                marginBottom: 10, width: 300, padding: 20
+                marginBottom: 10, width: 300, padding: 20, borderRadius : 10
             }}>
                 <TextField
                     fullWidth

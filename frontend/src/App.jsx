@@ -33,7 +33,7 @@ function App() {
           
            <Appbar2></Appbar2>
             <Routes>
-              <Route path="courses/:courseId" element={<Course />}></Route>
+              <Route path="admin/courses/:courseId" element={<Course />}></Route>
               <Route path="admin/courses" element={<AdminCourses />}></Route>
               <Route path="user/purchasedCourse" element={<PurchasedCourse />}></Route>
               <Route path="user/courses" element={<UserCourses />}></Route>

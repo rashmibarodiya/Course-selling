@@ -7,6 +7,8 @@ import { useSetRecoilState,useRecoilValue } from 'recoil';
 
  export function Adminbar() {
 
+    //good image https://static.technians.com/wp-content/uploads/2020/02/Guidelines-for-images-of-website-desig-title.jpg
+
     const navigate = useNavigate();
     const username = useRecoilValue(userName)
     const setUsername = useSetRecoilState(userName)
@@ -25,7 +27,7 @@ import { useSetRecoilState,useRecoilValue } from 'recoil';
         }).then((res) => {
             if (res.ok) {
                 return res.text().then((data) => {
-                    //setUsername(data);
+                    setUsername(data);
                     console.log("DATA : " + data);
                 });
             } else {
@@ -95,12 +97,15 @@ import { useSetRecoilState,useRecoilValue } from 'recoil';
 
                 </div>
 
-                <div style={{
+                {/* <div style={{
                     display:"flex",
-                    justifyContent:"center"
+                    justifyContent:"center",
+                    marginTop :20
                 }}  >
-                <img src={`https://www.buhave.com/wp-content/uploads/2019/05/education.jpg`} style={{ width: 'auto', height: 300 }} />
-                </div>
+                <img src={`https://www.buhave.com/wp-content/uploads/2019/05/education.jpg`} style={{display:"flex",
+                    justifyContent:"center",zIndex : 0,
+                    marginTop :40, width: 'auto', height: 400 }} />
+                </div> */}
 
 
             </>
