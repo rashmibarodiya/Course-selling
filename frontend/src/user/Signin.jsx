@@ -3,13 +3,17 @@
 import { Button, Typography, Card, TextField } from "@mui/material"
 import{useState} from 'react'
 import axios from 'axios'
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
+import {userName} from '../state/atoms/Username.jsx'
+import { useSetRecoilState } from 'recoil';
 
 function Signin() {
 
     const url = `https://fantastic-happiness-jjrgp4974647f5rr5-8000.app.github.dev/users/login`
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const x = useSetRecoilState(userName)
+
     const navigate = useNavigate()
     return (
         <>
@@ -65,7 +69,8 @@ function Signin() {
                                 }
                             })
                             localStorage.setItem("token", res.data.token)
-                            window.location ="/" 
+                            x(username)
+                            navigate("/") 
                          
                             alert("navigated")
                         //    

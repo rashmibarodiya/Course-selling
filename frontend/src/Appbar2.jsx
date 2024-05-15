@@ -4,19 +4,63 @@ import { useNavigate } from 'react-router-dom';
 import { Adminbar } from "./admin/Adminbar.jsx";
 import { Userbar } from "./user/Userbar.jsx";
 import { userRole } from './state/atoms/Username.jsx'
-import { useSetRecoilState, useRecoilValue } from 'recoil';
+ import { useSetRecoilState, useRecoilValue } from 'recoil';
+import {userName} from './state/atoms/Username.jsx'
+import { useEffect } from "react";
+
+var r = "";
+function checkUser(){
+   
+    const setUsername = useSetRecoilState(userName)
+    const setRole = useSetRecoilState(userRole)
+    const url = `https://fantastic-happiness-jjrgp4974647f5rr5-8000.app.github.dev`;
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        console.log("token :: " + token)
+
+        fetch(`${url}` + `/me`, {
+            method: 'GET',
+            headers: {
+                "authorization": `Bearer ${localStorage.getItem("token")}`
+            }
+        }).then((res) => {
+            if (res.ok) {
+                return res.text().then((data) => {
+                    setUsername(data.userName);
+                    if(data.role === "admin"){
+                        setRole("admin")
+                        r = "admin"
+                    }else if(data.role === "user"){
+                        setRole("user")
+                        r = "user"
+                    } 
+                    console.log("DATA : " + data);
+                    // window.location = "/"
+                });
+            } else {
+                return res.text().then((text) => {
+                    console.log("Non-JSON Response: " + text);
+                });
+            }
+        })
+
+    }, []);
+
+}
+
 
 function Appbar2() {
-    const role = useRecoilValue(userRole);
-
-
-
+checkUser();
+const role = useRecoilValue(userRole);
+console.log("role ********** "+r)
 
     return (
         <div>
+            
             {!role ? (
                 <Classic />
-            ) : role === "Admin" ? (
+            ) : role === "admin" ? (
+                
                 <div>
                     <Adminbar />
                 </div>

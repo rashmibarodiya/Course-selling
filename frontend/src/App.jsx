@@ -54,9 +54,4 @@ function App() {
 }
 
 
-
-function Classic(){
-
-}
-
 export default App
