@@ -1,7 +1,7 @@
 
 require('dotenv').config()
 const express = require('express');
-const app = express(); 
+const app = express();
 const cors = require("cors")
 app.use(cors())
 
@@ -9,16 +9,17 @@ app.use(cors())
 const mongoose = require('mongoose');
 
 const jwt = require('jsonwebtoken');
-const port =  process.env.PORT
+const port = process.env.PORT
+var role = "";
 
 console.log(process.env.HI)
 const mongId = process.env.MONG
 //const bodyParser = require('body-parser');
 app.use(express.json());
 
-const SECRET = process.env.se; 
+const SECRET = process.env.se;
 console.log(SECRET)
- console.log(mongId)
+console.log(mongId)
 // console.log(mongId)
 const userSchema = new mongoose.Schema({
   username: String,
@@ -28,35 +29,35 @@ const userSchema = new mongoose.Schema({
 
 
 const adminSchema = new mongoose.Schema({
-  username:String,
-  password:String
+  username: { type: String, unique: true },
+  password: String
 })
 const courseSchema = new mongoose.Schema({
   title: String,
   description: String,
   price: { type: Number, default: 100 },
-  imageLink: String ,
+  imageLink: String,
   published: { type: Boolean, default: true }
 });
 
 
 // create models for mongoose
 
-const User = mongoose.model('User',userSchema);
-const Admin = mongoose.model('Admin',adminSchema);
-const Course = mongoose.model('Courses',courseSchema);
+const User = mongoose.model('User', userSchema);
+const Admin = mongoose.model('Admin', adminSchema);
+const Course = mongoose.model('Courses', courseSchema);
 
 // connect to MongoDB
 
 mongoose.connect(mongId,
-{dbname: 'courses'}
+  { dbname: 'courses' }
 );
 
 
 
 function authenticateJwt(req, res, next) {
   const authHeader = req.headers.authorization;
-  //console.log("token :: "+authHeader)
+  console.log("token :: "+authHeader)
   if (authHeader) {
     const token = authHeader.split(' ')[1];
     new Promise((resolve, reject) => {
@@ -65,63 +66,69 @@ function authenticateJwt(req, res, next) {
           reject(err);
         } else {
           req.user = data;
+          console.log(req.user)
+        //  role = data.role;
           resolve();
         }
       });
     })
-    .then(() => {
-      next();
-    })
-    .catch((err) => {
-      res.status(403).send({ msg: "Unauthorized access" });
-    });
+      .then(() => {
+        next();
+      })
+      .catch((err) => {
+        res.status(403).send({ msg: "Unauthorized access" });
+      });
   } else {
     res.status(401).json({ message: "No token provided" });
   }
 }
 
 
-app.get("/admin/me", authenticateJwt,(req, res) => {
- 
-  res.status(200).send(req.user.username)
+app.get("/me", authenticateJwt, (req, res) => {
+console.log("hiiiiiii")
+console.log(req.user)
+  res.status(200).send(req.user)
 })
 
-app.get("/user/me", authenticateJwt,(req, res) => {
- 
-  res.status(200).send(req.user.username)
-})
+// app.get("/user/me", authenticateJwt, (req, res) => {
 
+//   res.status(200).send(req.user)
+// })
+//"here"
 
 // Admin routes
 app.post('/admin/signup', async (req, res) => {
-  // logic to sign up admin
-  console.log("i am not here")
   console.log("signup")
-  var {username, password} = req.body;
-  var admin = await User.findOne({username: username })
+  
+
+  var { username, password } = req.body;
+  var admin = await Admin.findOne({ username })
   if (admin) {
     res.status(403).json({ message: 'admin already exists' });
-  }
-  admin = new Admin({
+  } else {
+    admin = new Admin({
       username: username,
       password: password
-  });
-  admin.save();
-  const payload = jwt.sign({ username: username }, SECRET, { expiresIn: '1h' })
-
-  res.status(200).send({
-    message: "User created successfully",
-    token: payload,
-  });
+    });
+    admin.save();
+    const payload = jwt.sign({ username: username, role: "admin" }, SECRET, { expiresIn: '1h' })
+    role = "admin"
+    res.status(200).send({
+      message: "User created successfully",
+      token: payload,
+    });
+  }
 });
 
 app.post('/admin/login', async (req, res) => {
   // logic to log in admin
-  var {username, password} = req.body;
-  var admin = await Admin.findOne({username: username, password: password })
+  role = "admin"
+  var { username, password } = req.body;
+  var admin = await Admin.findOne({ username: username })
   if (admin) {
-    const token = jwt.sign({ username }, SECRET, { expiresIn: '1h' });
+    const token = jwt.sign({ username, role: "admin" }, SECRET, { expiresIn: '1h' });
     console.log("hi")
+    role = "admin"
     res.json({ message: 'Admin login succesfully', token });
   } else {
     console.log("not found")
@@ -131,22 +138,23 @@ app.post('/admin/login', async (req, res) => {
 
 app.post('/admin/courses', authenticateJwt, async (req, res) => {
   // logic to create a course
-var {title, description,imageLink} = req.body;
+  var { title, description, imageLink } = req.body;
 
-  const course = new Course({title: title, description: description, imageLink:imageLink})
+  const course = new Course({ title: title, description: description, imageLink: imageLink })
   await course.save();
   res.json({ message: 'Course created successfully', courseId: course.id });
-  
+
 });
 
-app.put('/admin/courses/:courseId',authenticateJwt, async (req, res) => {
+app.put('/admin/courses/:courseId', authenticateJwt, async (req, res) => {
   // logic to edit a course
   var courseId = req.params.courseId
-  var course = await Course.findOne({_id: courseId})
+  var course = await Course.findOne({ _id: courseId })
   if (course) {
     course.title = req.body.title
     course.description = req.body.description
-    course.imageLink =req.body.imageLink
+    course.imageLink = req.body.imageLink
+    course.price = req.body.price
     await course.save();
     res.json({ message: 'Course updated successfully', course: course });
   } else {
@@ -157,17 +165,17 @@ app.put('/admin/courses/:courseId',authenticateJwt, async (req, res) => {
 
 app.get('/admin/courses', authenticateJwt, async (req, res) => {
   // logic to get all courses
-  
+
   var courses = await Course.find({})
   // console.log(courses)
   res.json(courses);
 });
 
 // User routes
-app.post('/users/signup', async(req, res) => {
+app.post('/users/signup', async (req, res) => {
   // logic to sign up user
-  var {username, password} = req.body;
-  var user = await User.findOne({username: username })
+  var { username, password } = req.body;
+  var user = await User.findOne({ username: username })
   if (user) {
     res.status(403).json({ message: 'User already exists' });
   }
@@ -177,10 +185,10 @@ app.post('/users/signup', async(req, res) => {
   res.json({ message: 'User created successfully', token });
 });
 
-app.post('/users/login', async(req, res) => {
+app.post('/users/login', async (req, res) => {
   // logic to log in user
-  var {username, password} = req.body;
-  var user = await User.findOne({username: username })
+  var { username, password } = req.body;
+  var user = await User.findOne({ username: username })
   if (user) {
     const token = jwt.sign({ username }, SECRET, { expiresIn: '1h' });
     res.json({ message: 'User login succesfully', token });
@@ -189,9 +197,9 @@ app.post('/users/login', async(req, res) => {
   }
 });
 
-app.get('/user/courses', authenticateJwt,async(req, res) => {
+app.get('/user/courses', authenticateJwt, async (req, res) => {
   // logic to list all courses
-  var courses = await Course.find({published: true})
+  var courses = await Course.find({ published: true })
   // console.log(courses)
   res.json(courses);
 });
@@ -200,7 +208,7 @@ const { ObjectId } = require('mongodb');
 
 app.post('/users/courses/:courseId', authenticateJwt, async (req, res) => {
   const course = await Course.findById(req.params.courseId);
- // console.log(course);
+  // console.log(course);
   if (course) {
     const user = await User.findOne({ username: req.user.username });
     if (user) {
@@ -217,9 +225,9 @@ app.post('/users/courses/:courseId', authenticateJwt, async (req, res) => {
 
 
 
-app.get('/users/purchasedCourses',authenticateJwt, async (req, res) => {
+app.get('/users/purchasedCourses', authenticateJwt, async (req, res) => {
   // logic to view purchased courses
- // console.log("i am in")
+  // console.log("i am in")
   const user = await User.findOne({ username: req.user.username }).populate('purchasedCourses');
   //console.log("user :"+user)
   if (user) {
