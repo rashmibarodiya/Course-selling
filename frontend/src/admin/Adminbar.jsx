@@ -11,33 +11,33 @@ import { useSetRecoilState,useRecoilValue } from 'recoil';
 
     const navigate = useNavigate();
     const username = useRecoilValue(userName)
-    const setUsername = useSetRecoilState(userName)
+   // const setUsername = useSetRecoilState(userName)
 
-   // const [username, setUsername] = useState("")
-    const url = `https://fantastic-happiness-jjrgp4974647f5rr5-8000.app.github.dev`;
-    useEffect(() => {
-        const token = localStorage.getItem("token");
-        console.log("token :: " + token)
+//    // const [username, setUsername] = useState("")
+//     const url = `https://fantastic-happiness-jjrgp4974647f5rr5-8000.app.github.dev`;
+//     useEffect(() => {
+//         const token = localStorage.getItem("token");
+//         console.log("token :: " + token)
 
-        fetch(`${url}` + `/admin/me`, {
-            method: 'GET',
-            headers: {
-                "authorization": `Bearer ${localStorage.getItem("token")}`
-            }
-        }).then((res) => {
-            if (res.ok) {
-                return res.text().then((data) => {
-                    setUsername(data);
-                    console.log("DATA : " + data);
-                });
-            } else {
-                return res.text().then((text) => {
-                    console.log("Non-JSON Response: " + text);
-                });
-            }
-        })
+//         fetch(`${url}` + `/admin/me`, {
+//             method: 'GET',
+//             headers: {
+//                 "authorization": `Bearer ${localStorage.getItem("token")}`
+//             }
+//         }).then((res) => {
+//             if (res.ok) {
+//                 return res.text().then((data) => {
+//                     setUsername(data);
+//                     console.log("DATA : " + data);
+//                 });
+//             } else {
+//                 return res.text().then((text) => {
+//                     console.log("Non-JSON Response: " + text);
+//                 });
+//             }
+//         })
 
-    }, []);
+//     }, []);
 
 
     if (username) {

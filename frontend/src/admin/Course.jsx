@@ -58,6 +58,7 @@ function CourseCard(props) {
         <Typography align="center">{course.title}</Typography>
         <Typography align="center">{course.description}</Typography>
         <img src={course.imageLink} style={{ width: '100%', height: 300 }} />
+      
       </Card>
     </div>
   );
@@ -68,7 +69,7 @@ function UpdateCard(props) {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [imageLink, setImageLink] = useState('');
-
+  const [price, setPrice] = useState("");
   const [courses, setCourses] = useRecoilState(courseState);
   let course = null
   courses.map((a) => {
@@ -90,6 +91,8 @@ function UpdateCard(props) {
         <br /><br />
         <TextField value={imageLink} fullWidth onChange={(e) => setImageLink(e.target.value)} label={"Image Link"} variant={"outlined"} />
         <br /><br />
+        <TextField value={price} fullWidth onChange={(e) => setPrice(e.target.value)} label={"Price"} variant={"outlined"} />
+        <br /><br />
         <Button size="large" variant={"outlined"} onClick={() => {
           fetch(`${url}/${courseId}`, {
             method: 'PUT',
@@ -97,6 +100,7 @@ function UpdateCard(props) {
               title,
               description,
               imageLink,
+              price,
               published: true
             }),
             headers: {

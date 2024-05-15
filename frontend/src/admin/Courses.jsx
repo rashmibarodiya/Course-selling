@@ -18,7 +18,7 @@ function Courses() {
             }
         }).then((res) => {
             if (res.ok) {
-                
+
                 res.json().then((data) => {
                     setCourses(data);
                     console.log(data)
@@ -54,7 +54,7 @@ function Courses() {
 }
 
 function CardShape(props) {
-    const { title, description, imageLink } = props.course;
+    const { title, description, imageLink, price } = props.course;
     const navigate = useNavigate()
     return (
         <div>
@@ -70,13 +70,21 @@ function CardShape(props) {
                 <Typography align="center">{description}</Typography>
                 <img src={imageLink} style={{ width: '100%', height: 300 }} />
 
-
-
-                <Button variant={"outlined"}
-                    onClick={() => {
-                        navigate(`${props.course._id}`);
-                    }}
-                >edit</Button>
+                <div style={{
+                    display : "flex",
+                    justifyContent : "space-between"
+                }}>
+                    <div>
+                    <Typography  align="center">Price - ${price}</Typography>
+                    </div>
+                    <div>
+                    <Button variant={"outlined"}
+                        onClick={() => {
+                            navigate(`${props.course._id}`);
+                        }}
+                    >edit</Button>
+                    </div>
+                </div>
             </Card>
         </div>
     );

@@ -9,6 +9,7 @@ function AddCourse() {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [imageLink, setImageLink] = useState('');
+    const [price, setPrice] = useState('');
     const url = `https://fantastic-happiness-jjrgp4974647f5rr5-8000.app.github.dev/admin/courses`
     return <>
 
@@ -57,6 +58,16 @@ function AddCourse() {
 
                 </TextField>
                 <br /><br />
+                <TextField
+                    fullWidth
+                    onChange={(e) => {
+                        setPrice(e.target.value)
+                    }}
+                    label={"Price"}
+                    variant={"outlined"}>
+
+                </TextField>
+                <br /><br />
 
                 <Button size="large" variant={"outlined"}
                 
@@ -67,6 +78,7 @@ function AddCourse() {
                             title,
                             description,
                             imageLink,
+                            price,
                             published : true
                         }),
                         headers:{
