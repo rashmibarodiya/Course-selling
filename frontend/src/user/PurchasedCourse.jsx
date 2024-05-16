@@ -44,13 +44,14 @@ function PurchasedCourse() {
 }
 
 function CardShape({ course }) {
-    const { title, description, imageLink } = course;
+    const { title, description, imageLink,price } = course;
     return (
         <div>
             <Card variant="outlined" style={{  borderRadius : 10}}>
                 <Typography align="center">{title}</Typography>
                 <Typography align="center">{description}</Typography>
                 <img src={imageLink} style={{ width: '100%', height: 300 }} />
+                <Typography align="left"> Price - ${price}</Typography>
             </Card>
         </div>
     );

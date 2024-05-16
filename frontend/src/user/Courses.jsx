@@ -8,7 +8,7 @@ function Courses() {
 
 
     useEffect(() => {
-       
+
         const url = `https://fantastic-happiness-jjrgp4974647f5rr5-8000.app.github.dev/user/courses`;
         fetch(url, {
             method: 'GET',
@@ -18,7 +18,7 @@ function Courses() {
             }
         }).then((res) => {
             if (res.ok) {
-                
+
                 res.json().then((data) => {
                     setCourses(data);
                     console.log(data)
@@ -33,7 +33,8 @@ function Courses() {
 
 
     return (
-        <div>
+         <div style={{backgroundColor: "#2E4053"}}>
+        {/* <div> */}
             <div style={{ marginTop: 0 }}>
                 <Typography align='center' fontSize={40}>Courses</Typography>
             </div>
@@ -54,47 +55,59 @@ function Courses() {
 }
 
 function CardShape(props) {
-    const { title, description, imageLink } = props.course;
+    const { title, description, imageLink, price } = props.course;
     const navigate = useNavigate()
 
     const handlePurchaseCourse = () => {
         const url = `https://fantastic-happiness-jjrgp4974647f5rr5-8000.app.github.dev/users/courses/${props.course._id}`;
         console.log(localStorage.getItem("token"))
-        axios.post(url,{},{
+        axios.post(url, {}, {
             headers: {
                 "Content-Type": "application/json",
                 "authorization": `Bearer ${localStorage.getItem("token")}`
             }
         })
-        .then((res) => {
-            console.log(res);
-            alert("Course purchased successfully");
-        })
-        .catch((error) => {
-            console.error("Error purchasing course:", error);
-        });
+            .then((res) => {
+                console.log(res);
+                alert("Course purchased successfully");
+            })
+            .catch((error) => {
+                console.error("Error purchasing course:", error);
+            });
     };
 
     return (
         <div>
+
             <Card variant="outlined" style={{
                 marginTop: 10,
                 minHeight: 200,
                 marginRight: 20,
                 width: 300,
                 padding: 10
-                , borderRadius : 10
+                , borderRadius: 10
             }}>
                 <Typography align="center">{title}</Typography>
 
                 <Typography align="center">{description}</Typography>
                 <img src={imageLink} style={{ width: '100%', height: 300 }} />
+                {/* <br></br> */}
+                
+                <div style={{
+                    display:"flex",
+                    justifyContent : "space-between",
+                    marginTop:9
+                }}>
+                    <div>
+                        <Typography align="left">Price - ${price}</Typography>
+                    </div>
 
-
-
-                <Button variant={"outlined"}
-                   onClick={handlePurchaseCourse}
-                >Purchase Course</Button>
+                    <div>
+                        <Button variant={"outlined"}
+                            onClick={handlePurchaseCourse}
+                        >Purchase</Button>
+                    </div>
+                </div>
             </Card>
         </div>
     );

@@ -1,51 +1,27 @@
 import { Button, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import {userName} from '../state/atoms/Username.jsx'
-import { useSetRecoilState,useRecoilValue } from 'recoil';
+import { useRecoilValue } from 'recoil';
 
 
  export function Userbar() {
 
     const navigate = useNavigate();
     const username = useRecoilValue(userName)
-    
-    
-    // const url = `https://fantastic-happiness-jjrgp4974647f5rr5-8000.app.github.dev`;
-    // useEffect(() => {
-    //     const token = localStorage.getItem("token");
-    //     console.log("token :: " + token)
-
-    //     fetch(`${url}` + `/user/me`, {
-    //         method: 'GET',
-    //         headers: {
-    //             "authorization": `Bearer ${localStorage.getItem("token")}`
-    //         }
-    //     }).then((res) => {
-    //         if (res.ok) {
-    //             return res.text().then((data) => {
-    //                 setUsername(data);
-    //                 console.log("DATA : " + data);
-    //                 // window.location = "/"
-    //             });
-    //         } else {
-    //             return res.text().then((text) => {
-    //                 console.log("Non-JSON Response: " + text);
-    //             });
-    //         }
-    //     })
-
-    // }, []);
-
 
     if (username) {
         return (
 
             <>
+            <div style={{
+                   
+                    backgroundColor:"#AAB7B8"
+                }}>
 
                 <div style={{
                     display: "flex",
-                    justifyContent: "center"
+                    justifyContent: "center",
+                    backgroundColor:"#AAB7B8"
                 }}>
                     <Typography fontSize={20} style={{fontStyle : "normal", fontFamily: "cursive"}}>Hi {username}!</Typography>
                 </div>
@@ -92,7 +68,7 @@ import { useSetRecoilState,useRecoilValue } from 'recoil';
 
                     </div>
                 </div>
-
+                </div>
 
             </>
         )
