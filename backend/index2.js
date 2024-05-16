@@ -65,7 +65,7 @@ function authenticateJwt(req, res, next) {
         if (err) {
           reject(err);
         } else {
-          req.user = data;
+          req.user = data;  // this is sending an object having username and role
           console.log(req.user)
         //  role = data.role;
           resolve();
@@ -86,7 +86,7 @@ function authenticateJwt(req, res, next) {
 
 app.get("/me", authenticateJwt, (req, res) => {
 console.log("hiiiiiii")
-console.log(req.user)
+console.log(req.user) // this is sending an object having username and role
   res.status(200).send(req.user)
 })
 
@@ -181,7 +181,7 @@ app.post('/users/signup', async (req, res) => {
   }
   const newUser = new User({ username, password });
   await newUser.save();
-  const token = jwt.sign({ username }, SECRET, { expiresIn: '1h' });
+  const token = jwt.sign({ username, role : "user"}, SECRET, { expiresIn: '1h' });
   res.json({ message: 'User created successfully', token });
 });
 
@@ -190,7 +190,7 @@ app.post('/users/login', async (req, res) => {
   var { username, password } = req.body;
   var user = await User.findOne({ username: username })
   if (user) {
-    const token = jwt.sign({ username }, SECRET, { expiresIn: '1h' });
+    const token = jwt.sign({ username , role : "user"}, SECRET, { expiresIn: '1h' });
     res.json({ message: 'User login succesfully', token });
   } else {
     res.status(404).json({ message: 'User not found' });
@@ -204,7 +204,7 @@ app.get('/user/courses', authenticateJwt, async (req, res) => {
   res.json(courses);
 });
 
-const { ObjectId } = require('mongodb');
+// const { ObjectId } = require('mongodb');
 
 app.post('/users/courses/:courseId', authenticateJwt, async (req, res) => {
   const course = await Course.findById(req.params.courseId);
