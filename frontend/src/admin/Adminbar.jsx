@@ -11,6 +11,7 @@ import { useSetRecoilState,useRecoilValue } from 'recoil';
 
     const navigate = useNavigate();
     const username = useRecoilValue(userName)
+    console.log("usernameeee :: ; "+username)
    // const setUsername = useSetRecoilState(userName)
 
 //    // const [username, setUsername] = useState("")
@@ -44,7 +45,9 @@ import { useSetRecoilState,useRecoilValue } from 'recoil';
         return (
 
             <>
-          
+          <div style={{
+            backgroundColor :"#543310"
+          }}>
 
                 <div style={{
                     display: "flex",
@@ -96,6 +99,7 @@ import { useSetRecoilState,useRecoilValue } from 'recoil';
 
 
                 </div>
+                </div>
 
                 {/* <div style={{
                     display:"flex",
@@ -140,7 +144,7 @@ import { useSetRecoilState,useRecoilValue } from 'recoil';
                                 navigate('admin/login');
 
                             }}
-                        >Signin</Button>
+                        >LOGIN</Button>
                     </div>
 
                 </div>

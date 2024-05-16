@@ -33,8 +33,8 @@ function Courses() {
 
 
     return (
-        <div>
-            <div style={{ marginTop: 0 }}>
+        <div style={{ marginTop: 0 , backgroundColor : "#74512D"}}>  
+            <div >
                 <Typography align='center' fontSize={40}>Courses</Typography>
             </div>
             <div style={{

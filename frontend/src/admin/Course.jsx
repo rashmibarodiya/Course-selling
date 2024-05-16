@@ -2,6 +2,10 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { Card, Typography, TextField, Button } from "@mui/material"
+//  import {title} from '../state/atoms/Course.jsx'
+// import {des} from '../state/atoms/Course.jsx'
+// import {price} from '../state/atoms/Course.jsx'
+// import {img} from '../state/atoms/Course.jsx'
 import { atom } from "recoil";
 
 const courseState = atom({
@@ -32,9 +36,10 @@ function Course() {
   return (
     <div style={{
       display: "flex",
-      justifyContent: "space-around", 
+      justifyContent: "space-around",
       marginTop: '100'
     }}>
+      {/* <topper/> */}
       <CourseCard courseId={courseId}></CourseCard>
       <UpdateCard courseId={courseId} url={url}></UpdateCard>
     </div>
@@ -54,23 +59,37 @@ function CourseCard(props) {
   console.log("hi::::" + course.imageLink)
   return (
     <div>
-      <Card variant="outlined" style={{ marginTop: 10, minHeight: 200, marginRight: 20, width: 300, padding: 10}}>
+      <Card variant="outlined" style={{ marginTop: 10, minHeight: 200, marginRight: 20, width: 300, padding: 10 }}>
         <Typography align="center">{course.title}</Typography>
         <Typography align="center">{course.description}</Typography>
         <img src={course.imageLink} style={{ width: '100%', height: 300 }} />
-      
+        <Typography align="left">Price - ${course.price}</Typography>
+
       </Card>
     </div>
   );
 }
 
+// function topper(){
+//   return (
+//     <>
+//     <div style={{
+//       backgroundColor: "#212F3C"
+//     }}></div>
+//     </>
+//   )
+// }
+
 function UpdateCard(props) {
   const { courseId, url } = props;
-  const [title, setTitle] = useState('');
+  const [courses, setCourses] = useRecoilState(courseState);
+  
+  const [title, setTitle] = useState(courses.title);
   const [description, setDescription] = useState('');
   const [imageLink, setImageLink] = useState('');
   const [price, setPrice] = useState("");
-  const [courses, setCourses] = useRecoilState(courseState);
+
+
   let course = null
   courses.map((a) => {
     if (a._id == courseId) {
@@ -80,18 +99,18 @@ function UpdateCard(props) {
   if (!course) return <div>loading....</div>;
 
   return (
-    <div style={{}}>
+    <div style={{ marginTop: 130 }}>
       <Card variant="outlined" style={{ marginTop: 10, minHeight: 200, marginRight: 20, width: 300, padding: 10, borderRadius: 10 }}>
         <div>
-          <Typography align = "center">New value to be used</Typography>
-        </div>   
-        <TextField  value={title} fullWidth onChange={(e) => setTitle(e.target.value)} label={"Title"} variant={"outlined"} />
+          <Typography align="center">Update course details</Typography>
+        </div>
+        <TextField  fullWidth onChange={(e) => setTitle(e.target.value)} label={"Title"} variant={"outlined"} />
         <br /><br />
-        <TextField value={description} fullWidth onChange={(e) => setDescription(e.target.value)} label={"Description"} variant={"outlined"} />
+        <TextField  fullWidth onChange={(e) => setDescription(e.target.value)} label={"Description"} variant={"outlined"} />
         <br /><br />
-        <TextField value={imageLink} fullWidth onChange={(e) => setImageLink(e.target.value)} label={"Image Link"} variant={"outlined"} />
+        <TextField  fullWidth onChange={(e) => setImageLink(e.target.value)} label={"Image Link"} variant={"outlined"} />
         <br /><br />
-        <TextField value={price} fullWidth onChange={(e) => setPrice(e.target.value)} label={"Price"} variant={"outlined"} />
+        <TextField  fullWidth onChange={(e) => setPrice(e.target.value)} label={"Price"} variant={"outlined"} />
         <br /><br />
         <Button size="large" variant={"outlined"} onClick={() => {
           fetch(`${url}/${courseId}`, {
