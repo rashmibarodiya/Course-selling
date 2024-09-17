@@ -57,7 +57,7 @@ mongoose.connect(mongId,
 
 function authenticateJwt(req, res, next) {
   const authHeader = req.headers.authorization;
-  console.log("token :: "+authHeader)
+  console.log("token  :: "+authHeader)
   if (authHeader) {
     const token = authHeader.split(' ')[1];
     new Promise((resolve, reject) => {
@@ -85,7 +85,7 @@ function authenticateJwt(req, res, next) {
 
 
 app.get("/me", authenticateJwt, (req, res) => {
-console.log("hiiiiiii")
+console.log("just checking something")
 console.log(req.user) // this is sending an object having username and role
   res.status(200).send(req.user)
 })
